@@ -4,6 +4,9 @@ Your girlfriend Amaka needs some money to buy Brazilian Hair but you don't want 
 
 Let's make a fair choice with Rock Paper Scissors!
 
+Live preview: https://espinovah.github.io/Rock-Paper-Scissors/
+
+
 ## v1.0
 
 How to play.
@@ -13,5 +16,8 @@ How to play.
 - It's time to play! Choose between rock, paper or scissors.
 - You get to play 5 rounds. Keep an eye on your console for the outcome of the each round
 - Now that the game is over, it's settled! Be a man and give her the money if you lost. Other wise DON'T! You should learn to be wicked more often. lol
+
+![rock-paper-scissorsV1](https://user-images.githubusercontent.com/81432480/177018722-539368f9-cb74-44bb-9e28-478cde3786f3.gif)
+
 
 Disclaimer: Givers never lack! (not my handwriting, running boy emoji)
