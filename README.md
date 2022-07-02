@@ -6,6 +6,11 @@ Let's make a fair choice with Rock Paper Scissors!
 
 Live preview: https://espinovah.github.io/Rock-Paper-Scissors/
 
+## v2.0
+This update comes with a UI for you to play Rock Paper Scissors
+
+![rock-paper-scissorsV2](https://user-images.githubusercontent.com/81432480/177018977-0c6e855e-a4bf-4eab-a4f7-cf08a5425455.gif)
+
 
 ## v1.0
 
