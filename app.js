@@ -1,115 +1,143 @@
-let userWins = 0;
-let amakaWins = 0;
-let totalRounds = 0;
+let playerWins = 0;
+let compWins = 0;
+let totalRounds = 1;
+
+let countRound= document.createElement('div');
+let playerChoice = document.createElement('div');
+let compChoice = document.createElement('div');
+let outCome = document.createElement('div');
 
 
-// This function returns a random choice for Amaka
+
+let rockBtn = document.querySelector('.rockBtn');
+let paperBtn = document.querySelector('.paperBtn');
+let scissorsBtn = document.querySelector('.scissorsBtn');
+let scoreBoard = document.querySelector('.displayScore');
+let playerScoreValue = document.querySelector('.playerScore');
+let compScoreValue = document.querySelector('.compScore');
+
+
+const option = document.querySelector('.playerCard');
+const container = document.querySelector('.container');
+
+rockBtn.addEventListener('click', playRound)
+paperBtn.addEventListener('click', playRound)
+scissorsBtn.addEventListener('click', playRound)
+
+
 function computerPlay(){
-    let numb = Math.floor(Math.random()*10);
-    if (numb%3 === 0 || numb%5 === 0) {
+    let numb = Math.floor(Math.random()*3);
+    console.log(numb);
+    if (numb === 0) {
         return 'rock'
-    } else if (numb%2 === 0) {
+    } else if (numb === 1) {
         return 'paper'
-    } else {
+    } else if (numb === 2) {
         return 'scissors'
     }
 }
 
-// This function checks user's choice and Amaka's choice
-function playRound(playerSelection, computerSelection) {
-    playerSelection = playerSelection.toLowerCase();
+function playRound(e) {
+    let computerSelection = computerPlay(); 
+    let playerSelection = e.target; 
+
+    let gameLogic = () => {
+    let pSec = playerSelection.textContent.toLowerCase();
     if (computerSelection === 'rock') { 
-        if (playerSelection === 'paper'){
-            userWins++;
-            totalRounds++;
-            return "You won! Paper beats Rock"
-        } else if(playerSelection === 'scissors'){
-            return "You Lose! Rock beats Scissors"
-        } else if (playerSelection === computerSelection) {
-            return "It's a tie!"    
-        } else if (playerSelection !== 'rock' || 'paper' || 'scissors') {
-            return "Ops! \"" + playerSelection + "\" isn\'t an option"
+            if (playerSelection == paperBtn){
+                playerWins++;
+                totalRounds++;
+                return "You won! Paper beats Rock";
+
+            } 
+            else if(playerSelection == scissorsBtn){
+                compWins++;
+                totalRounds++;
+                return "You Lose! Rock beats Scissors";
+            } 
+            else if (pSec == computerSelection) {
+                totalRounds++;
+                return "It's a tie!";
+            }
+        } 
+    else if(computerSelection === 'paper'){
+            if (playerSelection == scissorsBtn){
+                playerWins++;
+                totalRounds++;
+                return "You won! Scissors beats Paper";
+            } 
+            else if(playerSelection == rockBtn){
+                compWins++;
+                totalRounds++;
+                return "You Lose! Paper beats Rock";
+            } 
+            else if (pSec == computerSelection) {
+                totalRounds++;
+                return "It's a tie!";
+            }
+        } 
+    else if(computerSelection === 'scissors'){
+            if (playerSelection == rockBtn){
+                playerWins++;
+                totalRounds++;
+                return "You won! Rock beats Scissors";
+            } else if(playerSelection == paperBtn){
+                compWins++;
+                totalRounds++;
+                return "You Lose! Scissors beats Paper";
+            } else if (pSec == computerSelection) {
+                totalRounds++;
+                return "It's a tie!";
+            }
+        
         }
-
-    } else if(computerSelection === 'paper'){
-        if (playerSelection === 'scissors'){
-            userWins++;
-            totalRounds++;
-            return "You won! Scissors beats Paper"
-        } else if(playerSelection === 'rock'){
-            amakaWins++;
-            totalRounds++;
-            return "You Lose! Paper beats Rock"
-        } else if (playerSelection === computerSelection) {
-            totalRounds++;
-            return "It's a tie!"
-        } else if (playerSelection !== 'rock' || 'paper' || 'scissors') {
-            return "Ops! \"" + playerSelection + "\" isn\'t an option"
-        }
-
-    } else if(computerSelection === 'scissors'){
-        if (playerSelection === 'rock'){
-            userWins++;
-            totalRounds++;
-            return "You won! Rock beats Scissors"
-        } else if(playerSelection === 'paper'){
-            amakaWins++;
-            totalRounds++;
-            return "You Lose! Scissors beats Paper"
-        } else if (playerSelection === computerSelection) {
-            totalRounds++;
-            return "It's a tie!"
-        } else if (playerSelection !== 'rock' || 'paper' || 'scissors') {
-            return "Ops! \"" + playerSelection + "\" isn\'t an option"
-        }
-    }    
-}
-
-// This function starts the game
-function startGame() {
-    alert('Amaka wants something! Let Rock Paper Scissors help you decide');
-
-}
-
-// This function accepts player input and prints winner of each round.
-function nextRound () {
-    let playerSelection = prompt('Rock Paper Scissors? Make a choice!');
-    let computerSelection = computerPlay();
-    console.log(`++ You chose: ${playerSelection} \n++ Amaka chose: ${computerSelection}`);
-    console.log(playRound (playerSelection, computerSelection));
-    scoreBoard();
-
-}
-
-// This function prints the player scores
-function scoreBoard(){
-    console.log(`Your score: ${userWins} || Amaka's score: ${amakaWins}`);
-    console.log('--------------');
-}
-
-// This function prints game result
-function whoWins(){
-    if (userWins > amakaWins){
-        return "Congrats, you just saved some money!"
-    } else if ( amakaWins > userWins) {
-        return "Yo man, you lost! Ask for her account number"
-    } else {
-        return "There\'s no winner"
+        
     }
-}
 
-// This function loops the game 5 times.
-function game() {
-    for (let i = 0; i <= 5; i++){
-        if (i == 0) {
-            startGame();
-        } else {
-            nextRound();
-        }        
+    scoreBoard.textContent = ' ';
+    playerChoice.textContent = `You chose: ${playerSelection.textContent}`;
+    compChoice.textContent = `Amaka chose: ${computerSelection.toUpperCase()}`;
+    countRound.textContent = ` Round ${totalRounds} `;
+    countRound.style.cssText = 'border-bottom: 6px solid #ffffff; margin-bottom: 20px';
+    outCome.textContent = gameLogic();
+    outCome.style.cssText = 'background-color: #000000; padding: 10px; border-radius: 10px';
+    playerScoreValue.textContent = playerWins;
+    compScoreValue.textContent = compWins;
+
+    let callWinner = document.querySelector('.rspOutcome');
+    callWinner.style.backgroundColor = 'white';
+
+    
+    if (playerWins == 5|| compWins == 5) {
+        callWinner.textContent = endGame();
+        function endGame() {
+            if (playerWins > compWins){
+                callWinner.style.backgroundColor = 'green';
+                playerWins = 0;
+                compWins = 0;
+                totalRounds = 1;
+                return "You won the game!"
+            } else if ( compWins > playerWins) {
+                callWinner.style.backgroundColor = 'red';
+                playerWins = 0;
+                compWins = 0;
+                totalRounds = 1;
+                return "You lost the game!"
+            } 
+        }
+
+
     }
-    console.log('**************');
-    console.log(whoWins());
-    scoreBoard();
+
+    scoreBoard.appendChild(countRound);
+    scoreBoard.appendChild(playerChoice);
+    scoreBoard.appendChild(compChoice);
+    scoreBoard.appendChild(outCome);
+
 }
 
-game();
+
+
+
+
+
